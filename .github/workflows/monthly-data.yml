@@ -1,0 +1,31 @@
+name: Monthly Investment Data
+
+on:
+  workflow_dispatch:
+
+jobs:
+  download-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get repository files
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python packages
+        run: |
+          pip install yfinance pandas
+
+      - name: Run financial data script
+        run: |
+          python lastonesQ32026_monthly_adjusted_close.py
+
+      - name: Save CSV to GitHub
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: "Update monthly investment data"
+          add: "*.csv"
