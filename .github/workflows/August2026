@@ -1,0 +1,26 @@
+import yfinance as yf
+import pandas as pd
+
+# Define the ticker and time period
+ticker = "XLE, VDE, XLB, VAW, XLI, VIS, XLY, VCR, XLP, KXI, XLV, IHI, XLF, IYF, VGT, IXN, VOX, FCOM, XLU, VPU, VNQ, IYR, EMXC, GLD, SPY, VTI, GBTC, PGHY, VWEHX, SHY, TLT"
+start_date = "2021-9-01"
+end_date = "2026-8-02"
+
+# Download data
+data = yf.download(
+    ticker,
+    start=start_date,
+    end=end_date,
+    interval="1mo"
+)
+
+# Keep only the 'Close' column
+adjusted_close = data[["Close"]]
+
+# Display the data
+print(adjusted_close)
+
+# Save to CSV
+adjusted_close.to_csv("lastonesQ32026_monthly_adjusted_close.csv")
+
+print("\nCSV file created: lastonesQ32026_monthly_adjusted_close.csv")
