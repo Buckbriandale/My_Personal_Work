@@ -3,6 +3,9 @@ name: Monthly Investment Data
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   download-data:
     runs-on: ubuntu-latest
